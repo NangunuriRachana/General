@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <center>
+            <h2>JavaScript</h2><br>
+
+            <p>Multiply every element in the array with 10 using map:</p>
+            <p id="mapdemo"></p><br>
+
+            <p>Filter the odd elements in the array using filter:</p>
+            <p id="filterdemo"></p><br>
+
+            <p>Sum of all the elements in the array using reduce:</p>
+            <p id="reducedemo"></p><br>
+
+            <p>Multiply the value of each element with 100 using forEach:</p>
+            <p id="foreachdemo"></p><br>
+
+            <script>
+                const numbers = [65, 44, 12, 4];
+
+                const mapArr = map(numbers,multiplyByTen);
+                document.getElementById("mapdemo").innerHTML = mapArr;
+
+                const filterArr = filter(numbers,isEven);
+                document.getElementById("filterdemo").innerHTML=filterArr;
+
+                const reduceVal = reduce(numbers,add);
+                document.getElementById("reducedemo").innerHTML = reduceVal;
+
+                forEach(numbers,multiplyByHundred);
+                document.getElementById("foreachdemo").innerHTML = numbers;
+
+                function map(arr, mapFunc) {
+                    const mapArr = []; // empty array
+                    // loop though array
+                    for(let i=0;i<arr.length;i++) {
+                        const result = mapFunc(arr[i], i, arr);
+                        mapArr.push(result);
+                    }
+                    return mapArr;
+                }
+
+                function multiplyByTen(num) {
+                    return num * 10;
+                }
+
+                function filter(arr, filterFunc) {
+                    const filterArr = []; // empty array
+                    // loop though array
+                    for(let i=0;i<arr.length;i++) {
+                        const result = filterFunc(arr[i], i, arr);
+                        // push the current element if result is true
+                        if(result)
+                            filterArr.push(arr[i]);
+                    }
+                    return filterArr;
+                }
+
+                function isEven(num) {
+                    if(num%2==0)
+                        return true;
+                    else
+                        return false;
+                }
+
+                 function reduce(arr, reducer, initialValue) {
+                    let accumulator = initialValue === undefined ? 0 : initialValue;
+                    // loop though array
+                    for(let i=0;i<arr.length;i++)
+                        accumulator = reducer(accumulator, arr[i], i, arr);
+                    return accumulator;
+                 }
+
+                 function add(total, num) {
+                    return total + num;
+                 }
+
+                 function forEach(arr, forEachFunc) {
+                    for(let i=0;i<arr.length;i++)
+                       forEachFunc(arr[i], i, arr);
+                 }
+
+                 function multiplyByHundred(item, index, arr) {
+                    arr[index] = item * 100;
+                 }
+
+            </script>
+        </center>
+    </body>
+</html>
